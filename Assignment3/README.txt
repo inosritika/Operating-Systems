@@ -1,0 +1,7 @@
+- The initial page size allocated for the heap is 8KB.
+- When the heap becomes fully occupied, we incrementally request an additional 8KB of memory each time.
+- In situations where the Free List lacks a chunk of sufficient size, we utilize the `mmap` function to obtain more memory.
+- The allocation strategy employed is Best-Fit, aimed at optimizing memory allocation.
+- Initially, memory allocation is reserved for the `info_heap` structure to manage the heap. Alternatively, a global variable approach could have been considered, with updates performed within the necessary functions.
+- We've introduced a header using `struct free_list_node` to encapsulate crucial information about each node within the Free List. This information includes whether a node is allocated or free, its size, and pointers to the next and previous nodes.
+- Although we utilize the `free_fl` variable to determine the allocation status of a node, we also implemented a "magic number" approach as an alternative method (as described in the book), although it remains unused.
